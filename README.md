@@ -5,3 +5,12 @@
 2、 Android属性动画values这个参数是值你要控制的属性的过过渡值，比如：
     ObjectAnimator.ofFloat(mToolbar , "translationX" , 200 , 300)；这段代码是是指mToolbar这个控件的
     translationX这个属性从0到200，再从200到300的过程；
+3、 使用Android Studio,在项目中添加.so文件,报错java.lang.UnsatisfiedlinkError: Native method not found
+    解决方法:
+    在 src -> main 里面创建 jniLibs -> armeabi,然后添加到此文件夹中即可
+    或者在build.gradle中添加以下代码:
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
