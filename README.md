@@ -11,7 +11,7 @@
     translationX这个属性从0到200，再从200到300的过程；
 3、 使用Android Studio,在项目中添加.so文件,报错java.lang.UnsatisfiedlinkError: Native method not found
 -------------------------------------------------------------------------------------------------------
-    解决方法:\<br>  
+    解决方法: 
     在 src -> main 里面创建 jniLibs -> armeabi,然后添加到此文件夹中即可\<br>  
     或者在build.gradle中添加以下代码:\<br>  
     sourceSets { 
