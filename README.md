@@ -19,4 +19,7 @@
                     jniLibs.srcDirs = ['libs']
                 }
             }
-
+4、使用System.loadLibrary()方法加载so库的时候传入的so文件名需要忽略掉文件名的签名lib；
+-------------------------------------------------------------------------------------
+   比如你要加载libMeggaRun.so这个库，正确的代码应该是System.loadLibrary("MeggaRun")，
+   而不是System.loadLibrary("libMeggaRun");
