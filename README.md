@@ -23,7 +23,7 @@
 -------------------------------------------------------------------------------------
    比如你要加载libMeggaRun.so这个库，正确的代码应该是System.loadLibrary("MeggaRun")，
    而不是System.loadLibrary("libMeggaRun");
-5、ListView的setEmptyView(emptyView)方法和addHeaderView(view)或addFooterView(view)有冲突，使用了setEmptyView(emptyView)方法后可能会
--------------------------------------------------------------------------------------------------------------------------------------
-使得addHeaderView(view)或addFooterView(view)添加的view不可见
--------------------------------------------------------------
+5、ListView的setEmptyView(emptyView)方法和addHeaderView(view)或addFooterView(view)有冲突；
+----------------------------------------------------------------------------------------------
+   使用了setEmptyView(emptyView)方法后可能会使得addHeaderView(view)或addFooterView(view)添加的view不可见；
+
