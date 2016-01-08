@@ -27,7 +27,7 @@
 ----------------------------------------------------------------------------------------------
    使用了setEmptyView(emptyView)方法后可能会使得addHeaderView(view)或addFooterView(view)添加的view不可见；
    
- 6、获取键盘的高度的方法
- ------------------------
+# 6、获取键盘的高度的方法#
+
   利用mYourView.getWindowVisibleDisplayFrame(r)在初始化中拿到一个View的可见区域，监听该View的布局变化，判断可见区域可计算出键盘的高度。
 
