@@ -31,5 +31,5 @@
 
   利用mYourView.getWindowVisibleDisplayFrame(r)在初始化中拿到一个View的可见区域，监听该View的布局变化，判断可见区域可计算出键盘的高度。
 # 7、使用java环境keyTool命令行自动生成签名文件
-    keytool -genkey -dname "CN=fingki,OU=server,O=server,L=bj,ST=bj,C=CN" -alias dongbai.keystore -keyalg RSA -keystore dongbai.keystore -keypass dongbai123 -storepass dongbai123 -validity 20000
+    keytool -genkey -dname "CN=fingki,OU=server,O=server,L=bj,ST=bj,C=CN" -alias dongbai.keystore -keyalg RSA -keystore dongbai.keystore -keypass 123456 -storepass 123456 -validity 20000
 
