@@ -32,4 +32,7 @@
   利用mYourView.getWindowVisibleDisplayFrame(r)在初始化中拿到一个View的可见区域，监听该View的布局变化，判断可见区域可计算出键盘的高度。
 # 7、使用java环境keyTool命令行自动生成签名文件
     keytool -genkey -dname "CN=fingki,OU=server,O=server,L=bj,ST=bj,C=CN" -alias dongbai.keystore -keyalg RSA -keystore dongbai.keystore -keypass 123456 -storepass 123456 -validity 20000
+  
+# 8、关于图片压缩的几点说明：
+     图片压缩分为尺寸压缩和质量压缩两种；质量压缩它不会减少图片的像素,比方说, 你的图片是300K的, 1280*700像素的, 经过该方法压缩后,      File形式的图片是在100以下, 以方便上传服务器, 但是你BitmapFactory.decodeFile到内存中,变成Bitmap时,它的像素仍然是1280*700；
 
