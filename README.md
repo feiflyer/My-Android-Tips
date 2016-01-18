@@ -80,7 +80,7 @@
     //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了  
     isBm = new ByteArrayInputStream(baos.toByteArray());  
     bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);  
-    return bitmap；  
+    return bitmap;
    }
    至于什么时候采用尺寸压缩，什么时候采用质量压缩由程序需求决定，一般来说为了优化内存方便显示则采用尺寸压缩，
    为了网络传输和节省手机磁盘存储空间则进行质量压缩；
