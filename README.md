@@ -38,7 +38,7 @@
      你的图片是300K的, 1280*700像素的, 经过该方法压缩后, File形式的图片是在100以下, 以方便上传服务器, 
      但是你BitmapFactory.decodeFile到内存中,变成Bitmap时,它的像素仍然是1280*700；
      质量压缩实例代码：
-     private Bitmap compressImage(Bitmap image) {  
+private Bitmap compressImage(Bitmap image) {  
   
         ByteArrayOutputStream baos = new ByteArrayOutputStream();  
         //质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中  
@@ -58,7 +58,7 @@
     }
      
      尺寸压缩改变了图片的像素点，改变了bitmap在内存中的大小和尺寸大小；实例代码：
-     private Bitmap compressImage(Bitmap image) {
+private Bitmap compressImage(Bitmap image) {
     BitmapFactory.Options newOpts = new BitmapFactory.Options();  
     //开始读入图片，此时把options.inJustDecodeBounds 设回true了  
     newOpts.inJustDecodeBounds = true;  
@@ -82,11 +82,12 @@
     //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了  
     isBm = new ByteArrayInputStream(baos.toByteArray());  
     bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);  
-    return compressImage(bitmap);//压缩好比例大小后再进行质量压缩  
+    return bitmap；  
 } 
-
 至于什么时候采用尺寸压缩，什么时候采用质量压缩由程序需求决定，一般来说为了优化内存方便显示则采用尺寸压缩，
 为了网络传输和节省手机磁盘存储空间则进行质量压缩；
 bitmap进行质量压缩并不会减少它所占用的内存，所以不必为了减少内存而进行质量压缩，	一般上传图片的流程是先判断图片文件的大小，如果超出一定大小则进行质量压缩，保存缓存文件，
 然后上传缓存文件，缓存文件上传成功后删除缓存文件；
+
+
 
