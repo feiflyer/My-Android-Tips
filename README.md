@@ -34,12 +34,11 @@
     keytool -genkey -dname "CN=fingki,OU=server,O=server,L=bj,ST=bj,C=CN" -alias dongbai.keystore -keyalg RSA -keystore dongbai.keystore -keypass 123456 -storepass 123456 -validity 20000
   
 # 8、关于图片压缩的几点说明：
-     图片压缩分为尺寸压缩和质量压缩两种；质量压缩它不会减少图片的像素,比方说, 
+   ##  图片压缩分为尺寸压缩和质量压缩两种；质量压缩它不会减少图片的像素,比方说, 
      你的图片是300K的, 1280*700像素的, 经过该方法压缩后, File形式的图片是在100以下, 以方便上传服务器, 
      但是你BitmapFactory.decodeFile到内存中,变成Bitmap时,它的像素仍然是1280*700；
      质量压缩实例代码：
-private Bitmap compressImage(Bitmap image) {  
-  
+     private Bitmap compressImage(Bitmap image) {  
         ByteArrayOutputStream baos = new ByteArrayOutputStream();  
         //质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中  
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -56,9 +55,9 @@ private Bitmap compressImage(Bitmap image) {
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片  
         return bitmap;  
     }
-     
-     尺寸压缩改变了图片的像素点，改变了bitmap在内存中的大小和尺寸大小；实例代码：
-private Bitmap compressImage(Bitmap image) {
+    
+    尺寸压缩改变了图片的像素点，改变了bitmap在内存中的大小和尺寸大小；实例代码：
+    private Bitmap compressImage(Bitmap image) {
     BitmapFactory.Options newOpts = new BitmapFactory.Options();  
     //开始读入图片，此时把options.inJustDecodeBounds 设回true了  
     newOpts.inJustDecodeBounds = true;  
@@ -88,6 +87,7 @@ private Bitmap compressImage(Bitmap image) {
 为了网络传输和节省手机磁盘存储空间则进行质量压缩；
 bitmap进行质量压缩并不会减少它所占用的内存，所以不必为了减少内存而进行质量压缩，	一般上传图片的流程是先判断图片文件的大小，如果超出一定大小则进行质量压缩，保存缓存文件，
 然后上传缓存文件，缓存文件上传成功后删除缓存文件；
+##
 
 
 
