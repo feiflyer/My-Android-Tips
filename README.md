@@ -37,4 +37,56 @@
      图片压缩分为尺寸压缩和质量压缩两种；质量压缩它不会减少图片的像素,比方说, 
      你的图片是300K的, 1280*700像素的, 经过该方法压缩后, File形式的图片是在100以下, 以方便上传服务器, 
      但是你BitmapFactory.decodeFile到内存中,变成Bitmap时,它的像素仍然是1280*700；
+     质量压缩实例代码：
+     private Bitmap compressImage(Bitmap image) {  
+  
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+        //质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中  
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        int options = 100;  
+        //循环判断如果压缩后图片是否大于100kb,大于继续压缩 
+        while ( baos.toByteArray().length / 1024>100) {          
+            baos.reset();//重置baos即清空baos  
+            //这里压缩options%，把压缩后的数据存放到baos中 
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos); 
+            options -= 10;//每次都减少10  
+        }  
+        //把压缩后的数据baos存放到ByteArrayInputStream中 
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray()); 
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片  
+        return bitmap;  
+    }
+     
+     尺寸压缩改变了图片的像素点，改变了bitmap在内存中的大小和尺寸大小；实例代码：
+     private Bitmap compressImage(Bitmap image) {
+    BitmapFactory.Options newOpts = new BitmapFactory.Options();  
+    //开始读入图片，此时把options.inJustDecodeBounds 设回true了  
+    newOpts.inJustDecodeBounds = true;  
+    Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);  
+    newOpts.inJustDecodeBounds = false;  
+    int w = newOpts.outWidth;  
+    int h = newOpts.outHeight;  
+    //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为  
+    float hh = 800f;//这里设置高度为800f  
+    float ww = 480f;//这里设置宽度为480f  
+    //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可  
+    int be = 1;//be=1表示不缩放  
+    if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放  
+        be = (int) (newOpts.outWidth / ww);  
+    } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放  
+        be = (int) (newOpts.outHeight / hh);  
+    }  
+    if (be <= 0)  
+        be = 1;  
+    newOpts.inSampleSize = be;//设置缩放比例  
+    //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了  
+    isBm = new ByteArrayInputStream(baos.toByteArray());  
+    bitmap = BitmapFactory.decodeStream(isBm, null, newOpts);  
+    return compressImage(bitmap);//压缩好比例大小后再进行质量压缩  
+} 
+
+至于什么时候采用尺寸压缩，什么时候采用质量压缩由程序需求决定，一般来说为了优化内存方便显示则采用尺寸压缩，
+为了网络传输和节省手机磁盘存储空间则进行质量压缩；
+bitmap进行质量压缩并不会减少它所占用的内存，所以不必为了减少内存而进行质量压缩，	一般上传图片的流程是先判断图片文件的大小，如果超出一定大小则进行质量压缩，保存缓存文件，
+然后上传缓存文件，缓存文件上传成功后删除缓存文件；
 
