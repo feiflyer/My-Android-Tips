@@ -94,22 +94,22 @@
      c、背景色为透明色。
      d、如果两个bitmap位置不完全一样，可能也是预期效果，只不过你看到的效果和你自己脑补的预期效果不一致。
      
-＃10、单例的几种写法比较：
+# 10、单例的几种写法比较：
+
      a、单线程写法
-public class Singleton {   
+    public class Singleton {   
     private static Singleton = new Singleton();
     private Singleton() {}
     public static getSignleton(){
         return singleton();
     }
-}
+    }
 
 b、考虑线程安全的写法（volatile关键字是JDK1.5之后的产物）
-public class Singleton {
+
+    public class Singleton {
     private static volatile Singleton singleton = null;
- 
     private Singleton(){}
- 
     public static Singleton getSingleton(){
         synchronized (Singleton.class){
             if(singleton == null){
@@ -118,14 +118,14 @@ public class Singleton {
         }
         return singleton;
     }    
-}
+    }
 
 c、兼顾线程安全和效率的写法
-public class Singleton {
+
+    public class Singleton {
     private static volatile Singleton singleton = null;
-    
-    private Singleton(){}
-    
+    private Singleton(){
+    }
     public static Singleton getSingleton(){
         if(singleton == null){
             synchronized (Singleton.class){
@@ -136,18 +136,18 @@ public class Singleton {
         }
         return singleton;
     }    
-}
+    }
 
 d、静态内部类法（由于静态内部类只会被加载一次，所以这种写法也是线程安全的）
-public class Singleton {
+
+    public class Singleton {
     private static class Holder {
         private static Singleton singleton = new Singleton();
     }
-    
     private Singleton(){}
         
     public static Singleton getSingleton(){
         return Holder.singleton;
     }
-}
+    }
 
