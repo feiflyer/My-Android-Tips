@@ -150,4 +150,10 @@ d、静态内部类法（由于静态内部类只会被加载一次，所以这�
         return Holder.singleton;
     }
     }
+ 
+ # 11、关于fitsSystemWindows属性和android:clipToPadding属性的介绍
+ 
+     http://gold.xitu.io/entry/56f25693f3609a00549b4102
+     
+     
 
