@@ -162,7 +162,7 @@ public static Singleton getSingleton(){
 ### 11、关于fitsSystemWindows属性和android:clipToPadding属性的介绍
  [fitsSystemWindows和android:clipToPadding介绍](http://gold.xitu.io/entry/56f25693f3609a00549b4102)
  
- ### 12、判断ListView到底底部或顶部的方法
+### 12、判断ListView到底底部或顶部的方法
  ```
  if ((firstVisibleItem + visibleItemCount) == totalItemCount) {
     View lastVisibleItemView = mListView.getChildAt(mListView.getChildCount() - 1);
